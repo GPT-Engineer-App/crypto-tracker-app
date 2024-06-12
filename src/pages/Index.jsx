@@ -1,10 +1,13 @@
 import { Container, VStack, Heading, Text, Box, SimpleGrid, Stat, StatLabel, StatNumber, StatHelpText, StatArrow } from "@chakra-ui/react";
-import { FaBitcoin, FaEthereum, FaDollarSign } from "react-icons/fa";
+import { FaBitcoin, FaEthereum, FaDollarSign, FaDog, FaGem, FaCoins } from "react-icons/fa";
 
 const cryptocurrencies = [
   { name: "Bitcoin", symbol: "BTC", price: "$43,000", change: "+5%", icon: FaBitcoin },
   { name: "Ethereum", symbol: "ETH", price: "$3,000", change: "-2%", icon: FaEthereum },
   { name: "Tether", symbol: "USDT", price: "$1", change: "0%", icon: FaDollarSign },
+  { name: "Dogecoin", symbol: "DOGE", price: "$0.25", change: "+10%", icon: FaDog },
+  { name: "Chainlink", symbol: "LINK", price: "$25", change: "+3%", icon: FaGem },
+  { name: "Cardano", symbol: "ADA", price: "$2.15", change: "-1%", icon: FaCoins },
 ];
 
 const Index = () => {
