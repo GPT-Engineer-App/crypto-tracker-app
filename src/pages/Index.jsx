@@ -1,5 +1,6 @@
-import { Container, VStack, Heading, Text, Box, SimpleGrid, Stat, StatLabel, StatNumber, StatHelpText, StatArrow } from "@chakra-ui/react";
+import { Container, VStack, Heading, Text, Box, SimpleGrid, Stat, StatLabel, StatNumber, StatHelpText, StatArrow, Button } from "@chakra-ui/react";
 import { FaBitcoin, FaEthereum, FaDollarSign, FaDog, FaGem, FaCoins } from "react-icons/fa";
+import { Link as RouterLink } from "react-router-dom";
 
 const cryptocurrencies = [
   { name: "Bitcoin", symbol: "BTC", price: "$43,000", change: "+5%", icon: FaBitcoin },
@@ -33,6 +34,9 @@ const Index = () => {
             </Box>
           ))}
         </SimpleGrid>
+        <Button as={RouterLink} to="/register" colorScheme="teal" size="lg">
+          Register
+        </Button>
       </VStack>
     </Container>
   );
