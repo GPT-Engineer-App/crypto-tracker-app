@@ -1,6 +1,7 @@
 import { Container, VStack, Heading, Text, Box, SimpleGrid, Stat, StatLabel, StatNumber, StatHelpText, StatArrow, Button } from "@chakra-ui/react";
 import { FaBitcoin, FaEthereum, FaDollarSign, FaDog, FaGem, FaCoins } from "react-icons/fa";
 import { Link as RouterLink } from "react-router-dom";
+import useBuySellNotifications from '../hooks/useBuySellNotifications';
 
 const cryptocurrencies = [
   { name: "Bitcoin", symbol: "BTC", price: "$43,000", change: "+5%", icon: FaBitcoin },
@@ -11,7 +12,15 @@ const cryptocurrencies = [
   { name: "Cardano", symbol: "ADA", price: "$2.15", change: "-1%", icon: FaCoins },
 ];
 
+import { useState } from "react";
+
 const Index = () => {
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [indications, setIndications] = useState({ buy: null, sell: null });
+
+  useBuySellNotifications(indications, phoneNumber);
+
+  // Add logic to update the indications state based on your application's requirements
   return (
     <Container maxW="container.xl" py={10}>
       <VStack spacing={8}>
@@ -34,6 +43,8 @@ const Index = () => {
             </Box>
           ))}
         </SimpleGrid>
+        {/* Add logic to update the indications state based on your application's requirements */}
+        
         <Button as={RouterLink} to="/register" colorScheme="teal" size="lg">
           Register
         </Button>
