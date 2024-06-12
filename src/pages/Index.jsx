@@ -1,4 +1,4 @@
-import { Container, VStack, Heading, Text, Box, SimpleGrid, Stat, StatLabel, StatNumber, StatHelpText, StatArrow, Button } from "@chakra-ui/react";
+import { Container, VStack, Heading, Text, Box, SimpleGrid, Stat, StatLabel, StatNumber, StatHelpText, StatArrow, Button, useToast } from "@chakra-ui/react";
 import { FaBitcoin, FaEthereum, FaDollarSign, FaDog, FaGem, FaCoins } from "react-icons/fa";
 import { Link as RouterLink } from "react-router-dom";
 import useBuySellNotifications from '../hooks/useBuySellNotifications';
@@ -17,6 +17,7 @@ const Index = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [indications, setIndications] = useState({ buy: null, sell: null });
   const [isLoading, setIsLoading] = useState(true);
+  const toast = useToast();
 
   useBuySellNotifications(indications, phoneNumber);
 
@@ -26,6 +27,23 @@ const Index = () => {
       setIsLoading(false);
     }, 1000); // Adjust the timeout as needed
   }, []);
+
+  useEffect(() => {
+    // Check for any errors in the console
+    window.addEventListener("error", (event) => {
+      toast({
+        title: "An error occurred.",
+        description: event.message,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    });
+
+    return () => {
+      window.removeEventListener("error", () => {});
+    };
+  }, [toast]);
 
   return (
     <Container maxW="container.xl" py={10}>
