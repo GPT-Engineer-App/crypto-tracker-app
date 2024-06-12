@@ -25,15 +25,17 @@ const Index = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log("Fetching data...");
         // Simulate data fetching
         setTimeout(() => {
           setIsLoading(false);
-          // Simulate successful data fetching
-          // If there's an error, setError should be called with the error message
+          setIndications({ buy: "Sample Buy Data", sell: "Sample Sell Data" }); // Simulate successful data fetching
+          console.log("Data fetched successfully");
         }, 1000); // Adjust the timeout as needed
       } catch (err) {
         setError("Failed to fetch data. Please try again.");
         setIsLoading(false);
+        console.error("Error fetching data:", err);
       }
     };
 
