@@ -6,6 +6,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -19,7 +20,7 @@ const Register = () => {
     try {
       // Add your registration logic here
       // For example, you can call an API to register the user
-      // await api.register({ email, password });
+      // await api.register({ email, password, phoneNumber });
 
       // On successful registration, navigate to the home page
       navigate("/");
@@ -59,6 +60,14 @@ const Register = () => {
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </FormControl>
+        <FormControl id="phone-number" isRequired>
+          <FormLabel>Phone Number</FormLabel>
+          <Input
+            type="tel"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </FormControl>
         <Button type="submit" colorScheme="blue" width="full">
