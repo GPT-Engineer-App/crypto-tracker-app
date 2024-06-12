@@ -17,15 +17,27 @@ const Index = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [indications, setIndications] = useState({ buy: null, sell: null });
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const toast = useToast();
 
   useBuySellNotifications(indications, phoneNumber);
 
   useEffect(() => {
-    // Simulate data fetching
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000); // Adjust the timeout as needed
+    const fetchData = async () => {
+      try {
+        // Simulate data fetching
+        setTimeout(() => {
+          setIsLoading(false);
+          // Simulate successful data fetching
+          // If there's an error, setError should be called with the error message
+        }, 1000); // Adjust the timeout as needed
+      } catch (err) {
+        setError("Failed to fetch data. Please try again.");
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -49,6 +61,8 @@ const Index = () => {
     <Container maxW="container.xl" py={10}>
       {isLoading ? (
         <Text>Loading...</Text>
+      ) : error ? (
+        <Text color="red.500">{error}</Text>
       ) : (
         <VStack spacing={8}>
           <Heading as="h1" size="2xl">Cryptocurrency Dashboard</Heading>
