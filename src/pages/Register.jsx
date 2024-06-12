@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Button, FormControl, FormLabel, Input, VStack, Alert, AlertIcon } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormLabel, Input, VStack, Alert, AlertIcon, Select } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -7,6 +7,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [subscriptionPlan, setSubscriptionPlan] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -20,7 +21,7 @@ const Register = () => {
     try {
       // Add your registration logic here
       // For example, you can call an API to register the user
-      // await api.register({ email, password, phoneNumber });
+      // await api.register({ email, password, phoneNumber, subscriptionPlan });
 
       // On successful registration, navigate to the home page
       navigate("/");
@@ -69,6 +70,18 @@ const Register = () => {
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
+        </FormControl>
+        <FormControl id="subscription-plan" isRequired>
+          <FormLabel>Subscription Plan</FormLabel>
+          <Select
+            placeholder="Select subscription plan"
+            value={subscriptionPlan}
+            onChange={(e) => setSubscriptionPlan(e.target.value)}
+          >
+            <option value="monthly">Monthly</option>
+            <option value="semi-annual">Semi-Annual</option>
+            <option value="annual">Annual</option>
+          </Select>
         </FormControl>
         <Button type="submit" colorScheme="blue" width="full">
           Register
