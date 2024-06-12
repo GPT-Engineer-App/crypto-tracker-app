@@ -2,6 +2,7 @@ import { Container, VStack, Heading, Text, Box, SimpleGrid, Stat, StatLabel, Sta
 import { FaBitcoin, FaEthereum, FaDollarSign, FaDog, FaGem, FaCoins } from "react-icons/fa";
 import { Link as RouterLink } from "react-router-dom";
 import useBuySellNotifications from '../hooks/useBuySellNotifications';
+import { useEffect, useState } from "react";
 
 const cryptocurrencies = [
   { name: "Bitcoin", symbol: "BTC", price: "$43,000", change: "+5%", icon: FaBitcoin },
@@ -12,43 +13,50 @@ const cryptocurrencies = [
   { name: "Cardano", symbol: "ADA", price: "$2.15", change: "-1%", icon: FaCoins },
 ];
 
-import { useState } from "react";
-
 const Index = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [indications, setIndications] = useState({ buy: null, sell: null });
+  const [isLoading, setIsLoading] = useState(true);
 
   useBuySellNotifications(indications, phoneNumber);
 
-  // Add logic to update the indications state based on your application's requirements
+  useEffect(() => {
+    // Simulate data fetching
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000); // Adjust the timeout as needed
+  }, []);
+
   return (
     <Container maxW="container.xl" py={10}>
-      <VStack spacing={8}>
-        <Heading as="h1" size="2xl">Cryptocurrency Dashboard</Heading>
-        <Text fontSize="lg">Track the latest prices and trends of your favorite cryptocurrencies.</Text>
-        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} width="100%">
-          {cryptocurrencies.map((crypto) => (
-            <Box key={crypto.symbol} p={5} shadow="md" borderWidth="1px" borderRadius="md">
-              <Stat>
-                <StatLabel display="flex" alignItems="center">
-                  <crypto.icon style={{ marginRight: "8px" }} />
-                  {crypto.name} ({crypto.symbol})
-                </StatLabel>
-                <StatNumber>{crypto.price}</StatNumber>
-                <StatHelpText>
-                  <StatArrow type={crypto.change.startsWith("+") ? "increase" : "decrease"} />
-                  {crypto.change}
-                </StatHelpText>
-              </Stat>
-            </Box>
-          ))}
-        </SimpleGrid>
-        {/* Add logic to update the indications state based on your application's requirements */}
-        
-        <Button as={RouterLink} to="/register" colorScheme="teal" size="lg">
-          Register
-        </Button>
-      </VStack>
+      {isLoading ? (
+        <Text>Loading...</Text>
+      ) : (
+        <VStack spacing={8}>
+          <Heading as="h1" size="2xl">Cryptocurrency Dashboard</Heading>
+          <Text fontSize="lg">Track the latest prices and trends of your favorite cryptocurrencies.</Text>
+          <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} width="100%">
+            {cryptocurrencies.map((crypto) => (
+              <Box key={crypto.symbol} p={5} shadow="md" borderWidth="1px" borderRadius="md">
+                <Stat>
+                  <StatLabel display="flex" alignItems="center">
+                    <crypto.icon style={{ marginRight: "8px" }} />
+                    {crypto.name} ({crypto.symbol})
+                  </StatLabel>
+                  <StatNumber>{crypto.price}</StatNumber>
+                  <StatHelpText>
+                    <StatArrow type={crypto.change.startsWith("+") ? "increase" : "decrease"} />
+                    {crypto.change}
+                  </StatHelpText>
+                </Stat>
+              </Box>
+            ))}
+          </SimpleGrid>
+          <Button as={RouterLink} to="/register" colorScheme="teal" size="lg">
+            Register
+          </Button>
+        </VStack>
+      )}
     </Container>
   );
 };
