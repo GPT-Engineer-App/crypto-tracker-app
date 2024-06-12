@@ -69,23 +69,27 @@ const Index = () => {
         <VStack spacing={8}>
           <Heading as="h1" size="2xl">Cryptocurrency Dashboard</Heading>
           <Text fontSize="lg">Track the latest prices and trends of your favorite cryptocurrencies.</Text>
-          <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} width="100%">
-            {cryptocurrencies.map((crypto) => (
-              <Box key={crypto.symbol} p={5} shadow="md" borderWidth="1px" borderRadius="md">
-                <Stat>
-                  <StatLabel display="flex" alignItems="center">
-                    <crypto.icon style={{ marginRight: "8px" }} />
-                    {crypto.name} ({crypto.symbol})
-                  </StatLabel>
-                  <StatNumber>{crypto.price}</StatNumber>
-                  <StatHelpText>
-                    <StatArrow type={crypto.change.startsWith("+") ? "increase" : "decrease"} />
-                    {crypto.change}
-                  </StatHelpText>
-                </Stat>
-              </Box>
-            ))}
-          </SimpleGrid>
+          {cryptocurrencies.length > 0 ? (
+            <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} width="100%">
+              {cryptocurrencies.map((crypto) => (
+                <Box key={crypto.symbol} p={5} shadow="md" borderWidth="1px" borderRadius="md">
+                  <Stat>
+                    <StatLabel display="flex" alignItems="center">
+                      <crypto.icon style={{ marginRight: "8px" }} />
+                      {crypto.name} ({crypto.symbol})
+                    </StatLabel>
+                    <StatNumber>{crypto.price}</StatNumber>
+                    <StatHelpText>
+                      <StatArrow type={crypto.change.startsWith("+") ? "increase" : "decrease"} />
+                      {crypto.change}
+                    </StatHelpText>
+                  </Stat>
+                </Box>
+              ))}
+            </SimpleGrid>
+          ) : (
+            <Text>No data available</Text>
+          )}
           <Button as={RouterLink} to="/register" colorScheme="teal" size="lg">
             Register
           </Button>
